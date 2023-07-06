@@ -1,6 +1,16 @@
-import Image from 'next/image'
+import Image from 'next/image';
+
+import { auth, firebase } from '../../services/firebase';
 
 export default function Login() {
+  async function signInWithGoogle(){
+    const provider = new firebase.auth.GoogleAuthProvider()
+    const result = await auth.signInWithPopup(provider)
+
+    return result;
+  }
+
+
   return (
     <>
       <section className="flex items-center justify-center p-1">
@@ -37,7 +47,7 @@ export default function Login() {
       </section>
 
       <section className="flex items-center p-1 justify-center mt-2">
-        <button className='w-14 h-14 border-2 border-gray-600 rounded-full ml-2 mr-2 flex items-center justify-center'>
+        <button className='w-14 h-14 border-2 border-gray-600 rounded-full ml-2 mr-2 flex items-center justify-center' onClick={signInWithGoogle}>
         <Image
           src='/google.svg'
           width={28}
